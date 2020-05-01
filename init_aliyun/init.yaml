@@ -1,0 +1,15 @@
+---
+- hosts: panghu
+  remote_user: root
+  tasks:
+    - name: check host network
+      ping: 
+      register: result
+
+    - name: add user:work, if ping is OK
+      user: 
+        name: work
+        password: work 
+        state: present
+      when: result.ping == "pong"
+

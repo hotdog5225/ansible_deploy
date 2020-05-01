@@ -1,0 +1,32 @@
+- name: add epel, git
+  yum:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - epel-release
+    - git
+    - bash-completion
+    - python-devel
+    - bind-utils
+    - jq
+    - htop
+    - lsof
+  ignore_errors: true
+
+- name: set -o vi
+  lineinfile:
+    path: ~/.bashrc
+    regexp: "^set -o vi$"
+    line: "set -o vi"
+
+- name: C-l -> clear
+  lineinfile:
+    path: ~/.bashrc
+    regexp: "clear-screen"
+    line: bind -m vi-insert "\C-l":clear-screen
+
+- name: LANG=
+  lineinfile:
+    path: ~/.bashrc
+    regexp: "export LANG"
+    line: export LANG=''
