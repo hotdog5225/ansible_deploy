@@ -1,4 +1,9 @@
 # 个人常用 ansible 脚本
+first mod
+second mod
+third mod
+
+the second time
 
 命令： ansible-playbook -i /inventory/hosts appxxx.ymal
 
