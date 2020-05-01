@@ -1,5 +1,6 @@
 # 个人常用 ansible 脚本
 
+
 命令： ansible-playbook -i /inventory/hosts appxxx.ymal
 
 ## Q&A
