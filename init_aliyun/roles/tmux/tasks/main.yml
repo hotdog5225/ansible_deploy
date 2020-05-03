@@ -1,12 +1,6 @@
 - name: prepare
   yum:
-    name: "{{item}}"
-  with_items:
-    - gcc
-    - automake
-    - libevent-devel
-    - ncurses-devel
-    - glibc-static
+   name: ['gcc', 'automake', 'libevent-devel', 'ncurses-devel', 'glibc-static']
 
 - name: install tmux
   git:
@@ -29,7 +23,7 @@
 - name: clone config file
   when: USE_ME
   git:
-    repo: https://github.com/shfshanyue/tmux-config.git 
+    repo: https://github.com/hotdog5225/tmux_config.git
     dest: ~/Documents/tmux-config
 
 - name: clone config file (from .tmux)
@@ -51,7 +45,19 @@
     dest: ~/.tmux.conf
     remote_src: yes
 
-- name: delete tmux-config 
+- name: cony config folder
+  copy:
+    src: ~/Documents/tmux-config/.tmux/
+    dest: ~/.tmux
+    remote_src: yes
+
+
+- name: delete temp tmux-config folder
   file:
     name: ~/Documents/tmux-config
+    state: absent
+
+- name: delete tmux install folder 
+  file:
+    name: ~/Documents/tmux
     state: absent

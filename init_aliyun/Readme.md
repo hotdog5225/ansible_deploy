@@ -1,9 +1,4 @@
 # 个人常用 ansible 脚本
-first mod
-second mod
-third mod
-
-the second time
 
 命令： ansible-playbook -i /inventory/hosts appxxx.ymal
 
@@ -24,3 +19,5 @@ git，file 能够更好地满足幂等性
 ## ansible 注意点
 
 + 在使用相关 ansible 模块前请先确认是否满足 requirements
+
+参考：https://github.com/shfshanyue/ansible-op

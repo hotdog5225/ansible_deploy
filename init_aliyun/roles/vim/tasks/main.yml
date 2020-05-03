@@ -1,20 +1,32 @@
-- name: install vim
-  git:
-    repo: https://github.com/vim/vim.git
-    dest: ~/Documents/vim
+#- name: install vim
+#  git:
+#    repo: https://github.com/vim/vim.git
+#    dest: ~/Documents/vim
+#
+#- name: make vim
+#  shell: make distclean && make && make install
+#  args:
+#    chdir: ~/Documents/vim
 
-- name: make vim
-  shell: make distclean && make && make install
-  args:
-    chdir: ~/Documents/vim
-
-- name: clone config file
+- name: clone my config file
   git:
-    repo: https://github.com/shfshanyue/vim-config.git
+    #repo: git@github.com:hotdog5225/vim_config.git
+    repo: https://github.com/hotdog5225/vim_config.git
     dest: ~/.vim-config
 
-- name: copy config file
+- name: "copy config file: .vimrc"
   copy:
     src: ~/.vim-config/.vimrc
     dest: ~/.vimrc
     remote_src: yes
+
+- name: "copy config file: .vim/"
+  copy:
+    src: ~/.vim-config/.vim
+    dest: ~/.vim
+    remote_src: yes
+
+- name: 'rm temp folders'
+  file: 
+    path: ~/.vim-config
+    state: absent

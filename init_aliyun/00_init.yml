@@ -13,3 +13,4 @@
         state: present
       when: result.ping == "pong"
 
+      # 后续就要配置一下ssh免密登录 root 和 work账户都要配置

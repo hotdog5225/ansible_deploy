@@ -1,0 +1,13 @@
+---
+- hosts: aliyun
+  roles:
+    - role: geerlingguy.git
+      vars:
+        # 从源码安装
+        git_install_from_source: true
+        # 安装最新版本
+        git_install_from_source_force_update: true
+
+    - role: vim
+
+    - role: tmux
