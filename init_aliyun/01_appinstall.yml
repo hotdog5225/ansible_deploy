@@ -11,3 +11,7 @@
     - role: vim
 
     - role: tmux
+
+    - role: tmux-work
+
+    - role: docker
