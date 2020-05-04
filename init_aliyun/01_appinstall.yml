@@ -10,6 +10,8 @@
 
     - role: vim
 
+    - role: vim-work
+
     - role: tmux
 
     - role: tmux-work
