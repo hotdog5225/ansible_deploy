@@ -1,0 +1,64 @@
+- name: prepare
+  yum:
+   name: ['gcc', 'automake', 'libevent-devel', 'ncurses-devel', 'glibc-static']
+
+- name: install tmux
+  git:
+    repo: https://github.com/tmux/tmux.git
+    dest: ~/Documents/tmux
+    version: 2.8
+
+- name: make tmux
+  shell: sh autogen.sh && ./configure && make
+  args:
+    chdir: ~/Documents/tmux/
+
+# root账户已经拷贝了，work账户不用再次拷贝，而且work也没有权限拷贝
+#- name: copy tmux
+#  copy:
+#    src: ~/Documents/tmux/tmux
+#    dest: /usr/bin/tmux
+#    remote_src: yes
+#    mode: 0755
+
+- name: clone config file
+  when: USE_ME
+  git:
+    repo: https://github.com/hotdog5225/tmux_config.git
+    dest: ~/Documents/tmux-config
+
+- name: clone config file (from .tmux)
+  git:
+    repo: https://github.com/gpakosz/.tmux.git
+    dest: ~/Documents/tmux-config
+  when: not USE_ME
+
+- name: copy config file (from .tmux)
+  copy:
+    src: ~/Documents/tmux-config/.tmux.conf.local
+    dest: ~/.tmux.conf.local
+    remote_src: yes
+  when: not USE_ME
+
+- name: copy config file
+  copy:
+    src: ~/Documents/tmux-config/.tmux.conf
+    dest: ~/.tmux.conf
+    remote_src: yes
+
+- name: cony config folder
+  copy:
+    src: ~/Documents/tmux-config/.tmux/
+    dest: ~/.tmux
+    remote_src: yes
+
+
+- name: delete temp tmux-config folder
+  file:
+    name: ~/Documents/tmux-config
+    state: absent
+
+- name: delete tmux install folder 
+  file:
+    name: ~/Documents/tmux
+    state: absent
