@@ -13,4 +13,14 @@
         state: present
       when: result.ping == "pong"
 
+    - name: 'install lrzsz for rz order'
+      yum:
+        name: lrzsz
+        state: present
+
+    - name: 'install upzip zip'
+      yum:
+        name: ['unzip', 'zip']
+        state: present
+
       # 后续就要配置一下ssh免密登录 root 和 work账户都要配置
