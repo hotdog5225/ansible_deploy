@@ -1,12 +1,12 @@
-- name: install vim
-  git:
-    repo: https://github.com/vim/vim.git
-    dest: ~/Documents/vim
-
-- name: make vim
-  shell: make distclean && make && make install
-  args:
-    chdir: ~/Documents/vim
+#- name: install vim
+#  git:
+#    repo: https://github.com/vim/vim.git
+#    dest: ~/Documents/vim
+#
+#- name: make vim
+#  shell: make distclean && make && make install
+#  args:
+#    chdir: ~/Documents/vim
 
 - name: clone my config file
   git:

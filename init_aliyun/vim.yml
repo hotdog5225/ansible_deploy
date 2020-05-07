@@ -1,4 +1,4 @@
-- hosts: aliyun
+- hosts: root
   remote_user: root
   roles:
     - vim

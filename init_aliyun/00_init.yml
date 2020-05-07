@@ -1,5 +1,5 @@
 ---
-- hosts: panghu
+- hosts: root
   remote_user: root
   tasks:
     - name: check host network
@@ -21,6 +21,26 @@
     - name: 'install upzip zip'
       yum:
         name: ['unzip', 'zip']
+        state: present
+
+    - name: 'install gcc-cpp'
+      yum:
+        name: ['gcc-c++']
+        state: present
+
+    - name: 'install ncurses-devel'
+      yum:
+        name: ['ncurses-devel']
+        state: present
+
+    - name: 'install bridge-utils'
+      yum:
+        name: ['bridge-utils']
+        state: present
+
+    - name: 'install traceroute'
+      yum:
+        name: ['traceroute', 'mtr' ,'bind-utils',  'telnet']
         state: present
 
       # 后续就要配置一下ssh免密登录 root 和 work账户都要配置

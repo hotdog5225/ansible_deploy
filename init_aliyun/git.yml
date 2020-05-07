@@ -1,5 +1,5 @@
 ---
-- hosts: aliyun
+- hosts: root
   roles:
     - role: geerlingguy.git
       vars:
