@@ -17,3 +17,5 @@
     - role: tmux-work
 
     - role: docker
+
+    - role: php
