@@ -1,0 +1,10 @@
+- hosts: root
+  remote_user: root
+  
+  roles:
+    - name: mdklatt.python3
+      python3_pyenv: "3.6.4"
+
+  environment:
+    http_proxy: http://127.0.0.1:8118
+    https_proxy: http://127.0.0.1:8118

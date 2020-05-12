@@ -43,4 +43,14 @@
         name: ['traceroute', 'mtr' ,'bind-utils',  'telnet']
         state: present
 
+    - name: 'install libsodium for shadowsocks'
+      yum:
+        name: libsodium
+        state: present
+
+    - name: 'install autoconf for privoxy'
+      yum:
+        name: autoconf
+        state: present
+
       # 后续就要配置一下ssh免密登录 root 和 work账户都要配置

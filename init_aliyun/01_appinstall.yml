@@ -1,5 +1,5 @@
 ---
-- hosts: aliyun
+- hosts: root
   roles:
     - role: geerlingguy.git
       vars:
@@ -18,4 +18,18 @@
 
     - role: docker
 
+      # 需要给远程主机配置翻墙代理
     - role: php
+
+      # 采用pyenv 安装python3
+    - role: mdklatt.python3
+
+      # 安装虚拟环境lxd virtual-box vagrant
+      # ansible-playbook -i inventory/hosts virtualtools.yml -vv
+
+      # 安装docker-compose
+    - role: andrewrothstein.docker-compose$
+
+  environment:
+    http_proxy: http://127.0.0.1:8118
+    https_proxy: http://127.0.0.1:8118

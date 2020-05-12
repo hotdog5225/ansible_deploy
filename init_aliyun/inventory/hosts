@@ -3,3 +3,6 @@ panghuwork
 
 [root]
 panghu
+
+[root:vars]
+ansible_user=root

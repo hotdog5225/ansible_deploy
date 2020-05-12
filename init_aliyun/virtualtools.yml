@@ -1,0 +1,25 @@
+---
+- hosts: root
+  collections:
+    - crivetimihai.virtualization
+  tasks:
+    - import_role:
+        name: kvm
+
+    - import_role:
+        name: lxd
+
+    - import_role:
+        name: virtualbox
+
+    - import_role:
+        name: podman
+
+    - import_role:
+        name: docker
+
+    - import_role:
+        name: packer
+
+    - import_role:
+        name: vagrant
