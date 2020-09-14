@@ -1,0 +1,33 @@
+---
+- name: delete old proxy config in  /etc/profile
+  blockinfile:
+    backup: yes
+    path: /etc/profile
+    state: absent
+    block: ""
+
+- name: append proxy config to /etc/profile
+  blockinfile:
+    insertafter: EOF
+    path: /etc/profile
+    state: present
+    block: |
+      MY_PROXY_URL="http://127.0.0.1:8123/"
+      HTTP_PROXY=$MY_PROXY_URL
+      HTTPS_PROXY=$MY_PROXY_URL
+      FTP_PROXY=$MY_PROXY_URL
+      http_proxy=$MY_PROXY_URL
+      https_proxy=$MY_PROXY_URL
+      ftp_proxy=$MY_PROXY_URL
+      export HTTP_PROXY HTTPS_PROXY FTP_PROXY http_proxy https_proxy ftp_proxy
+      export no_proxy="127.0.0.1,localhost"
+
+- name: source proxy config
+  shell:
+    cmd: source /etc/profile
+    executable: /bin/bash
+
+#- name: "test proxy now: curl cip.cc"
+#  shell:
+#    cmd: curl cip.cc
+

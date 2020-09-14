@@ -1,0 +1,6 @@
+shadowsocks_server: 54.245.164.147
+shadowsocks_password: h75f4ea
+shadowsocks_server_port: 16445
+shadowsocks_local_port: 1080
+shadowsocks_local_address: 127.0.0.1
+shadowsocks_config_name: default

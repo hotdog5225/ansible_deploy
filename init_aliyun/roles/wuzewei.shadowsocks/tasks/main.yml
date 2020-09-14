@@ -1,0 +1,74 @@
+---
+- name: install shadowsocks dependences
+  package:
+    name: ['gettext', 'build-essential', 'autoconf', 'libtool', 'libpcre3-dev', 'asciidoc', 'xmlto', 'libev-dev', 'libc-ares-dev', 'automake','libmbedtls-dev', 'libsodium-dev']
+    state: present
+
+- name: install snap 
+  command:
+    cmd: "{{ item  }}"
+  with_items:
+    - apt update
+    - apt update
+    - apt install -y snapd
+    - snap install core
+  register: snapresult
+
+- name: reboot 
+  shell:
+    cmd: sleep 5 && reboot
+  async: 1  # timeout for the current task
+  poll: 0   # start the next task immediately
+  when: snapresult.changed
+
+- name: wait for reboot...
+  wait_for_connection:
+    connect_timeout: 30
+    sleep: 5
+    delay: 5
+    timeout: 1200
+  when: snapresult.changed
+
+- name: install shadowsocks-libev using snap
+  shell:
+    cmd: sleep 5 && snap install shadowsocks-libev
+
+- name: include vars of config
+  include_vars: default_vars.yml
+
+- name: create directory needed
+  file:
+    path: /var/snap/shadowsocks-libev/common/etc/shadowsocks-libev
+    state: directory
+
+- name: upload config for shadowsocks-libev
+  template:
+    src: config.json.j2
+    dest: /var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/local-config.json
+
+- name: upload config for systemd
+  template:
+    src: service-config
+    dest: /etc/systemd/system/shadowsocks-libev-local@.service
+
+- name: starting shadowsocks-libev Client....
+  shell:
+    cmd: systemctl start shadowsocks-libev-local@local-config
+
+- name: check service stats
+  shell:
+    cmd: systemctl status shadowsocks-libev-local@local-config
+
+- name: test socks5 proxy Connection...
+  shell:
+    cmd: curl --proxy socks5://127.0.0.1:1080 https://ifconfig.me
+
+- name: install http-proxy -- polipo
+  include_tasks:
+    file: polipo.yml
+
+- name: include configproxy.yml
+  include_tasks:
+    file: configproxy.yml
+
+    

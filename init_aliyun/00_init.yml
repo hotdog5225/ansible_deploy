@@ -6,51 +6,15 @@
       ping: 
       register: result
 
+# run "mkpasswd --method=sha-512 work" to get encryptd pwd "work"
     - name: add user:work, if ping is OK
       user: 
         name: work
-        password: work 
+        password:  '$6$n7PI/8iafV670kDP$XA3q.29JRiFv6BJZ0MjFKMrS5lUVEH8vyr.WV3Xdy5p6MzWTMYvlprfmALkWQZaj1vIn3n6UfWdL2qWxg7Hl7.'
         state: present
+        groups:
+          - sudo
+        shell: /bin/bash
       when: result.ping == "pong"
 
-    - name: 'install lrzsz for rz order'
-      yum:
-        name: lrzsz
-        state: present
-
-    - name: 'install upzip zip'
-      yum:
-        name: ['unzip', 'zip']
-        state: present
-
-    - name: 'install gcc-cpp'
-      yum:
-        name: ['gcc-c++']
-        state: present
-
-    - name: 'install ncurses-devel'
-      yum:
-        name: ['ncurses-devel']
-        state: present
-
-    - name: 'install bridge-utils'
-      yum:
-        name: ['bridge-utils']
-        state: present
-
-    - name: 'install traceroute'
-      yum:
-        name: ['traceroute', 'mtr' ,'bind-utils',  'telnet']
-        state: present
-
-    - name: 'install libsodium for shadowsocks'
-      yum:
-        name: libsodium
-        state: present
-
-    - name: 'install autoconf for privoxy'
-      yum:
-        name: autoconf
-        state: present
-
-      # 后续就要配置一下ssh免密登录 root 和 work账户都要配置
+# now you need to run "ssh-copy-id -i ~/.ssh/id_rsa.pub aliyunwork" against your local machine.

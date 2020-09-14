@@ -1,0 +1,23 @@
+- name: install polipo
+  package:
+    name: polipo
+    state: present
+
+- name: start service polipo
+  shell:
+    cmd: systemctl start polipo
+
+- name: create polipo config dir
+  file:
+    path: /etc/polipo
+    state: directory
+
+- name: upload polipo config
+  template:
+    src: polipo_config
+    dest: /etc/polipo/config
+
+- name: restart polipo service
+  shell:
+    cmd: systemctl restart polipo && systemctl status polipo
+

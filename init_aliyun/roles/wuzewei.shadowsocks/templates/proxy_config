@@ -1,0 +1,14 @@
+# add follows to the end (set proxy settings to the environment variables)
+MY_PROXY_URL="http://127.0.0.1:1080/"
+
+HTTP_PROXY=$MY_PROXY_URL
+HTTPS_PROXY=$MY_PROXY_URL
+FTP_PROXY=$MY_PROXY_URL
+
+http_proxy=$MY_PROXY_URL
+https_proxy=$MY_PROXY_URL
+ftp_proxy=$MY_PROXY_URL
+
+export HTTP_PROXY HTTPS_PROXY FTP_PROXY http_proxy https_proxy ftp_proxy
+
+export no_proxy="127.0.0.1,localhost"

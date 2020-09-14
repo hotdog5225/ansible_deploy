@@ -1,0 +1,9 @@
+# ansible-playbook -i ./inventory 02_shadowsocks.yml -v
+- hosts: root
+  become: yes
+
+  tasks:
+    - name: install shadowsocks for debain
+      include_role:
+        name: wuzewei.shadowsocks
+
