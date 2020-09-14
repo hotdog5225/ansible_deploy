@@ -1,8 +1,0 @@
----
-- hosts: root
-  roles:
-    - role: andrewrothstein.docker-compose
-
-  environment:
-    http_proxy: http://127.0.0.1:8118
-    https_proxy: http://127.0.0.1:8118
